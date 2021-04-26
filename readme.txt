@@ -1,1 +1,2 @@
-Ne pas lire !
+####ELEMENTS UTILES####
+https://www.thegeekstuff.com/2010/07/bash-string-manipulation/
