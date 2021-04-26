@@ -17,19 +17,20 @@ fi
 rem()
 {
 	if [[ -f $1 ]];then             #si c'est un fichier
+                absrep=`readlink -f $1`	#lit le chemin absolut
                 mv $1 $corbeille
                 ficnom="${1##*/}"       #récupère le nom du fichier (cas où un chemin d'accès est four$
-                echo $ficnom
                 info="$ficnom.info"
-                echo $info
-                echo $1 > "$corbeille/.$info"   #crée le fichier .info
+                echo $absrep > "$corbeille/.$info"      #crée le fichier .info
         elif [[ -d $1 ]];then           #si c'est un dossier
-				mv $1 $corbeille
-                ficnom="${1##*/}"       #récupère le nom du fichier (cas où un chemin d'accès est four$
+                absrep=`readlink -f $1`
+                mv $1 $corbeille                #prend en compte le cas d'un dossier non vide
+                ficnom="$1"     #récupère le nom du fichier (cas où un chemin d'accès est fourni)
                 echo $ficnom
-                info="$ficnom.info"
+                info="${ficnom/%\//}.info" #épure le chemin d'accès en virant le "/" final
                 echo $info
-                echo $1 > "$corbeille/.$info"   #crée le fichier .info
+                echo $absrep
+                echo $absrep > "$corbeille/.$info"      #crée le fichier .info
         else
                 echo -e "Chemin invalide"
         fi
