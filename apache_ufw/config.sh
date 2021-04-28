@@ -6,7 +6,7 @@
 ###########################
 
 #AVERTISSEMENT PRIVILEGES
-[ "$UID" -eq 0 ] || { echo "Necessite une elevation."; exit 1;}
+[ "$UID" -eq 0 ] || { echo "Necessite une elevation."; exit 1;}  #vérifie qu'on lance en admin
 
 #INSTALLATION DU PAQUET UFW
 apt-get install ufw
