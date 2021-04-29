@@ -1,15 +1,18 @@
 #!/bin/sh
 
-echo #################
-echo                  
-echo #################
-
 # On met à jour le systeme pour pouvoir insaller
 
 sudo apt update -y
 
 #créer les dossiers de destination des disques
- sudo fdisk /dev/sdb
+(
+echo g
+echo n
+echo
+echo
+echo
+echo w
+) | fdisk /dev/sdb
 
 #creer une partition ext4 sur chacun des disques sdb
 
@@ -17,7 +20,7 @@ sudo mkfs.ext4 /dev/sdb1
 
 # Installer le pré-requis Java 
 
-sudo apt install openjdk-11-jdk
+sudo apt install openjdk-11-jdk -y
 
 # Installer la version stable de Jenkins et ses prérequis en suivant la documentation officielle : https://www.jenkins.io/doc/book/installing/linux
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
