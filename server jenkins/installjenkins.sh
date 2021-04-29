@@ -63,23 +63,20 @@ sudo cat /var/jenkins_home/secrets/initialAdminPassword
 # que le port utilisé pour la connexion ssh
 
 sudo apt -y install ufw
-
+ 
 #Installer un pare-feu (genre UFW)
 
 echo y | sudo ufw enable
 
-# Install iptables
+# allow port 8080
+sudo ufw allow 8080
 
-sudo apt install -y iptables
- 
-# Ouvertures des ports 80 pour jenkins et 22 pour le connexion
-
-sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+# allow port 22
+sudo ufw allow 22
 
 # ouvrir le SSH
 
-sudo ufw allow ssh
+sudo ufw allow OpenSSH
 
 # Connexion ssh
 
