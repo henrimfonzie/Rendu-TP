@@ -2,16 +2,16 @@
 ###########################
 #	setup apache		  #
 #	Tcherno, 27/04/2021   #
-#	Version : v1.0		  #
+#	Version : v1.02		  #
 ###########################
 
 ok=0
 [ "$UID" -eq 0 ] || { echo "Necessite une elevation."; exit 1;}
 #installation des paquets et dépendances
-sudo apt-get install -y apache2 nfs-common
+apt-get install -y apache2
 
 #vérifie le service
-sudo systemctl enable apache2
+systemctl enable apache2
 if [[ $? == 0 ]];then
 	echo -e "Configuration service OK\n"
 	((ok+=1))

@@ -2,14 +2,14 @@
 ###########################
 #	setup NFS			  #
 #	Tcherno, 28/04/2021   #
-#	Version : alpha		  #
+#	Version : v1.1		  #
 ###########################
 
 #AVERTISSEMENT PRIVILEGES
 [ "$UID" -eq 0 ] || { echo "Necessite une elevation."; exit 1;}  #vérifie qu'on lance en admin
 
 #INSTALLATION NFS SERVEUR
-apt-get install nfs-kernel-server
+apt-get -y install nfs-kernel-server
 if [[ $? == 0 ]];then
 	echo -e "Installation OK\nDebut configuration"
 fi
@@ -47,4 +47,15 @@ if [[ $ok == 2 ]];then
 else
 	echo -e "Erreur lors de la configuration du service nfs"
 	exit 1
+fi
+
+#CONFIGURATION DU JOB DE SAUVEGARDE (LANCEMENT DU SCRIPT)
+
+echo "35 0 */7 * * /usr/bin/rettsk.sh >> /var/log/retention_job.log" > /tmp/schdtsk
+crontab /tmp/schdtsk
+if [[ $? == 0 ]];then
+	rm /tmp/schdtsk
+	echo -e "Configration taches OK\n"
+else
+	echo "Erreur lors de la configuration crontab"; exit 1
 fi
