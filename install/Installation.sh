@@ -23,7 +23,7 @@ sudo apt -y update
 
 sudo apt install -y python3-dev
 
-# Installation python3-dev
+# Installation git
 
 sudo apt -y update
 
