@@ -36,5 +36,6 @@ _Récupérer "Installation.sh" sur le git
 _Récupérer "Installvagrant.sh" sur le git
 _Récupérer le contenu de "corbeille" sur le git
 _lancer "Installation.sh"
+_lancer "Installvagrant.sh"
 _Placer "suppr.sh" dans /usr/bin/
 _Tester "suppr.sh"
