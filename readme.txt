@@ -33,6 +33,7 @@ _Lancer "nfsmount.sh"
 
 4) Poste de Dèv :
 _Récupérer "Installation.sh" sur le git
+_Récupérer "Installvagrant.sh" sur le git
 _Récupérer le contenu de "corbeille" sur le git
 _lancer "Installation.sh"
 _Placer "suppr.sh" dans /usr/bin/
