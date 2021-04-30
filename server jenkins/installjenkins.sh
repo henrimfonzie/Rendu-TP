@@ -22,6 +22,10 @@ sudo apt update -y
 
 sudo apt install openjdk-11-jdk -y
 
+#Installation de gnup
+
+sudo apt -y install gnupg
+
 # Installer la version stable de Jenkins et ses prérequis en suivant la documentation officielle : https://www.jenkins.io/doc/book/installing/linux
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
@@ -55,9 +59,8 @@ sudo adduser userjob
 sudo cp /etc/sudoers /etc/sudoers.old
 
 # Permissions utilisation apt à userjob
-
-sudo cat /etc/sudoers |
-        sudo echo "userjob      ALL(ALL)/bin/apt," >> sudo tee -a /etc/sudoers
+sudo cp /etc/sudoers /etc/sudoers.old
+sudo su -c "echo 'userjob  ALL=/usr/bin/apt' >> /etc/sudoers"
 
 # Afficher à la fin de l'execution du script le contenu du fichier /var/jenkins_home/secrets/initialAdminPassword pour permettre de récupérer le mot de passe
 
@@ -87,7 +90,7 @@ sudo ufw allow ssh
 
 # Refuser le trafic entrant suivant les règles par défaut
 
-sudo ufw default deny incoming
+sudo ufw default deny
 
 # status
 
