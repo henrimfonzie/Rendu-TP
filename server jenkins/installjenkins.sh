@@ -1,22 +1,22 @@
 #!/bin/sh
 
-# On met à jour le systeme pour pouvoir insaller
-
-sudo apt update -y
-
 #créer les dossiers de destination des disques
-(
-echo g
-echo n
+(echo n
+echo p
 echo
 echo
 echo
-echo w
-) | fdisk /dev/sdb
+echo t
+echo
+echo 83
+echo w)| sudo fdisk /dev/sdb
 
 #creer une partition ext4 sur chacun des disques sdb
 
 sudo mkfs.ext4 /dev/sdb1
+
+# On met à jour le systeme pour pouvoir insaller
+sudo apt update -y
 
 # Installer le pré-requis Java 
 

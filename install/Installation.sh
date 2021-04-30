@@ -9,7 +9,7 @@ set -e # en cas d'erreur (code de retour non-zero) arreter le script
 
 sudo apt -y update
 
-sudo apt-get install python3
+sudo apt -y upgrade
 
 # Installation python3-pip
 
@@ -45,3 +45,7 @@ sudo add-apt-repository "deb https://packages.microsoft.com/repos/vscode stable 
 # installation de  la dernière version de Visual Studio
 
 sudo apt install code
+
+# mise a jour
+
+sudo apt list --upgradable
