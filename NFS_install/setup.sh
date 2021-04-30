@@ -2,9 +2,10 @@
 ###########################
 #	setup NFS			  #
 #	Tcherno, 28/04/2021   #
-#	Version : v1.1		  #
+#	Version : Beta R1.0	  #
 ###########################
 
+echo "ATTENTION : Beta Release !"
 #AVERTISSEMENT PRIVILEGES
 [ "$UID" -eq 0 ] || { echo "Necessite une elevation."; exit 1;}  #vérifie qu'on lance en admin
 
@@ -12,6 +13,8 @@
 apt-get -y install nfs-kernel-server
 if [[ $? == 0 ]];then
 	echo -e "Installation OK\nDebut configuration"
+else
+	echo -e "Erreur lors de l installation"; exit 1
 fi
 
 #CONFIGURATION DES DOSSIER ET DES DROITS

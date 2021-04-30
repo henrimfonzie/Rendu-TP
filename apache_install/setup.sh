@@ -2,15 +2,16 @@
 ###########################
 #	setup apache		  #
 #	Tcherno, 27/04/2021   #
-#	Version : v1.02		  #
+#	Version : v1.03		  #
 ###########################
 
-ok=0
+
 [ "$UID" -eq 0 ] || { echo "Necessite une elevation."; exit 1;}
 #installation des paquets et dépendances
 apt-get install -y apache2
 
 #vérifie le service
+ok=0
 systemctl enable apache2
 if [[ $? == 0 ]];then
 	echo -e "Configuration service OK\n"

@@ -2,8 +2,10 @@
 ###########################
 #	montage web			  #
 #	Tcherno, 28/04/2021   #
-#	Version : beta		  #
+#	Version : Beta	R1.0  #
 ###########################
+
+echo "ATTENTION : Beta Release !"
 
 #AVERTISSEMENT PRIVILEGES
 [ "$UID" -eq 0 ] || { echo "Necessite une elevation."; exit 1;}  #vérifie qu'on lance en admin
@@ -12,10 +14,10 @@
 apt-get -y install nfs-common
 
 #CONFIGURATION DES DOSSIER ET DES DROITS
-if [[ ! -d /media/web/ ]];then
+if [[ ! -d /media/web/ ]];then		#vérifie que le dossier n'existe pas
 	mkdir /media/web/
 	if [[ $? == 0 ]];then
-		echo -e "Creation dossier OK\nConfiguration des droits"
+		echo -e "Creation dossier OK\nConfiguration des droits"		#donne des droits permissifs pour pouvoir écrire dedans
 		sleep 1
 		chmod 777 /media/web/
 		if [[ $? == 0 ]];then
@@ -26,17 +28,17 @@ if [[ ! -d /media/web/ ]];then
 		echo -e "Erreur lors de la creation des partages"; exit 1
 	fi
 else
-	if stat -c "%a" /media/web/ != 777;then
+	if stat -c "%a" /media/web/ != 777;then		#Si le dossier existe déjà, vérifier/appliquer les droits
 		chmod 777 /media/web/
 	fi
 fi
 
 #CONFIGURATION DU JOB DE SAUVEGARDE (LANCEMENT DU SCRIPT)
 
-echo "0 * * * * /usr/bin/backuptsk.sh >> /var/log/backup_web.log 2>&1" > /tmp/schdtsk
+echo "0 * * * * /usr/bin/backuptsk.sh >> /var/log/backup_web.log 2>&1" > /tmp/schdtsk		#écrit la tâche dans un fichier temporaire
 crontab /tmp/schdtsk
 if [[ $? == 0 ]];then
-	rm /tmp/schdtsk
+	rm /tmp/schdtsk		#crée la tâche via le fichier
 	echo -e "Configration taches OK\n"
 else
 	echo "Erreur lors de la configuration crontab"; exit 1
