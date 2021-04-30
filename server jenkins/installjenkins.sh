@@ -1,23 +1,30 @@
 #!/bin/sh
 
-echo #################
-echo                  
-echo #################
-
-# On met à jour le systeme pour pouvoir insaller
-
-sudo apt update -y
-
 #créer les dossiers de destination des disques
- sudo fdisk /dev/sdb
+(echo n
+echo p
+echo
+echo
+echo
+echo t
+echo
+echo 83
+echo w)| sudo fdisk /dev/sdb
 
 #creer une partition ext4 sur chacun des disques sdb
 
 sudo mkfs.ext4 /dev/sdb1
 
+# On met à jour le systeme pour pouvoir insaller
+sudo apt update -y
+
 # Installer le pré-requis Java 
 
-sudo apt install openjdk-11-jdk
+sudo apt install openjdk-11-jdk -y
+
+#Installation de gnup
+
+sudo apt -y install gnupg
 
 # Installer la version stable de Jenkins et ses prérequis en suivant la documentation officielle : https://www.jenkins.io/doc/book/installing/linux
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
@@ -52,9 +59,8 @@ sudo adduser userjob
 sudo cp /etc/sudoers /etc/sudoers.old
 
 # Permissions utilisation apt à userjob
-
-sudo cat /etc/sudoers |
-        sudo echo "userjob      ALL(ALL)/bin/apt," >> sudo tee -a /etc/sudoers
+sudo cp /etc/sudoers /etc/sudoers.old
+sudo su -c "echo 'userjob  ALL=/usr/bin/apt' >> /etc/sudoers"
 
 # Afficher à la fin de l'execution du script le contenu du fichier /var/jenkins_home/secrets/initialAdminPassword pour permettre de récupérer le mot de passe
 
@@ -84,7 +90,7 @@ sudo ufw allow ssh
 
 # Refuser le trafic entrant suivant les règles par défaut
 
-sudo ufw default deny incoming
+sudo ufw default deny
 
 # status
 
