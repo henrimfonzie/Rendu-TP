@@ -52,7 +52,7 @@ wget localhost
 
 # Créer l'utilisateur user job
 
-sudo adduser userjob
+sudo useradd userjob
 
 ## Lui donner les permissions (via le fichier sudoers) d'utiliser apt (et seulement apt pas l'ensemble des droits admin)
 
